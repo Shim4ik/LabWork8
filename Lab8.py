@@ -23,6 +23,24 @@ def display_students():
             print(f"{subject}: {grade}")
         print("------------------------")
 
+# Функція для виведення студентів, відсортованих за середнім балом
+def display_sorted_students_by_average():
+    sorted_students = sorted(
+        students.items(),
+        key=lambda item: sum(item[1]['subjects_grades'].values()) / len(item[1]['subjects_grades']),
+        reverse=True
+    )
+    
+    print("Студенти, відсортовані за середнім балом:")
+    for student_id, student_info in sorted_students:
+        average_grade = sum(student_info['subjects_grades'].values()) / len(student_info['subjects_grades'])
+        print(f"ID Студента: {student_id}")
+        print(f"Група: {student_info['group_number']}")
+        print(f"ПІБ: {student_info['full_name']}")
+        print(f"Курс: {student_info['course']}")
+        print(f"Середній бал: {average_grade:.2f}")
+        print("------------------------")
+
 # Додавання студентів до словника
 add_student(101, "Адамчук Олег Вікторович", 3, {"Математика": 78, "Фізика": 80, "Програмування": 89})
 add_student(102, "Бабич Олександр Олександрович", 3, {"Математика": 92, "Фізика": 88, "Програмування": 94})
@@ -34,4 +52,7 @@ add_student(106, "Петренко Петро Олегович", 2, {"Матем
 # Виведення інформації про студентів
 display_students()
 
-#студенту Федоренко Роман потрібно розробити функцію сортування студентів по середньому балу від найбільшого у словнику.
+# Виведення відсортованих студентів за середнім балом
+display_sorted_students_by_average()
+
+#студенту Гордієнко Владиславу потрібно розробити функцію пошуку студента за прізвищем.
